@@ -1,0 +1,24 @@
+h1 {
+    font: 3em Avenir, sans-serif;
+    text-align: center;
+}
+
+
+table {
+    font: 2em Avenir, sans-serif;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    width: 100vw;
+}
+
+td, th {
+    font: 1em Avenir, sans-serif;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
