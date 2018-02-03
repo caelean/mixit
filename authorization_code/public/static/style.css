@@ -29,3 +29,20 @@ tr:nth-child(even) {
 h1.welcome {
     font-color: blue;
 }
+
+div {
+    margin: 0 auto;
+}
+
+button {
+    margin:auto;
+    background-color: blue; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font:2em Avenir, sans-serif;
+    display: flex;
+    justify-content: center;
+}
