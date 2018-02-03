@@ -22,3 +22,7 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+h1.welcome {
+    font-color: blue;
+}
