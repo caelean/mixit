@@ -5,15 +5,18 @@ h1 {
 
 
 table {
+    margin:auto;
     font: 2em Avenir, sans-serif;
-    padding-left: 10vw;
-    padding-right: 10vw;
-    width: 100vw;
+    width: 90vw;
+
+    border-collapse:separate;
+    border:solid black 1px;
+    border-radius:6px;
+    -moz-border-radius:6px;
 }
 
 td, th {
     font: 1em Avenir, sans-serif;
-    border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 
