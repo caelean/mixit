@@ -1,0 +1,31 @@
+h1 {
+    font: 3em Avenir, sans-serif;
+    text-align: center;
+}
+
+
+table {
+    margin:auto;
+    font: 2em Avenir, sans-serif;
+    width: 90vw;
+
+    border-collapse:separate;
+    border:solid black 1px;
+    border-radius:6px;
+    -moz-border-radius:6px;
+}
+
+td, th {
+    font: 1em Avenir, sans-serif;
+    text-align: left;
+    padding: 8px;
+
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+h1.welcome {
+    font-color: blue;
+}
