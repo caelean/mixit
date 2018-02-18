@@ -10,7 +10,7 @@ document.getElementById("welcometable").appendChild(tr);
 var tr2 = document.createElement("tr");
 tr2.innerHTML = '<tr>\n' +
     '\n' +
-    '    <td><a href="playlist.html">Party</a></td>\n' +
+    '    <td><a href="index.html">Party</a></td>\n' +
     '    <td><a href="chat.html">CBarnes6574</a></td>\n' +
     '    <td>4 songs</td>\n' +
     '  </tr>'

@@ -1,3 +1,6 @@
+var mixes = {};
+var user = 'Caelean';
+
 var tr = document.createElement("tr");
 tr.innerHTML = '<tr>\n' +
     '\n' +
@@ -40,10 +43,18 @@ tr5.innerHTML = '<tr>\n' +
     '  </tr>'
 document.getElementById("indextable").appendChild(tr5);
 
-document.getElementById("upload").addEventListener("click", uploadMix);
+
 function uploadMix() {
-    document.getElementById('fileInput').click()
+    document.getElementById('fileInput').click();
+    mixes[user] = "Caelean's Mix";
+    var mix = document.createElement("div");
+    mix.innerHTML = '<div id="checkList""><br><br><button>Mix by Caelean</button><button class="remove" onclick="removeAll()" >Remove mix</button></div>';
+    document.getElementById("buttons").appendChild(mix);
+
 }
 
+function removeAll(){
+    document.getElementById("checkList").innerHTML = "";
+}
 
 
