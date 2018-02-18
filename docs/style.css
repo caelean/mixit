@@ -34,6 +34,18 @@ div {
     margin: 0 auto;
 }
 
+button.button2 {
+  margin:auto;
+    background-color: green; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font:3px Avenir, sans-serif;
+    display: flex;
+    justify-content: center;
+}
 button {
     margin:auto;
     background-color: blue; /* Green */

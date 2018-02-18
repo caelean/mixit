@@ -1,45 +1,26 @@
 <!DOCTYPE html>
-<html>
-<title>Party</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose a Playlist</title>
+</head>
 <body>
     <link rel="stylesheet" type="text/css" href="style.css">
-<h1>Party</h1>
-
-
-<table>
-  <tr>
-
-    <th><b>Song</b></th>
-    <th><b>Artist</b></th>
-    <th><b>Length</b></th>
-
-  </tr>
-  <tr>
-    <td>Closer</td>
-    <td>Lemaitre</td>
-    <td>3:45</td>
-  </tr>
-  <tr>
-    <td>Super Mario World</td>
-    <td>Logic</td>
-    <td>4:12</td>
-  </tr>
-  <tr>
-    <td>You Were Right</td>
-    <td>Rufus De Sol</td>
-    <td>2:53</td>
-  </tr>
-  <tr>
-    <td>G.O.M.D.</td>
-    <td>J. Cole</td>
-    <td>4:33</td>
-  </tr>
+    <div class="container">
+      <div id="login">
+        <h1 class = "welcome">Choose a Playlist</h1>
+      </div>
+<table id="playlisttable">
+<input id ='addSong' value = '' type="text">
+<button id='myBtn' value = 'send' onclick="addSong()">Add Song</button>
 </table>
-
-<br>
-<br>
-<br>
-<button><a href="index.html">Upload a Mix</a></button>
-
+      <div id="loggedin">
+        <div id="user-profile">
+        </div>
+        <div id="oauth">
+        </div>
+      </div>
+    </div>
+<script src="playlist.js"></script>
 </body>
 </html>
