@@ -15,7 +15,8 @@ class App extends Component {
         this.state = {
             loggedIn: token ? true : false,
             nowPlaying: { name: 'Not Checked', albumArt: '' },
-            api: spotifyApi
+            api: spotifyApi,
+            playlists: ['user playlists'],
         };
     }
     getHashParams() {
@@ -39,25 +40,43 @@ class App extends Component {
                 <div>
                     <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
                 </div>
+                 <div>
+                    Playlists: { this.state.playlists }
+                </div>
 
                 { this.state.loggedIn &&
-                <button onClick={() => this.getNowPlaying()}>
-                    Check Now Playing
-                </button>
+                <div>
+                    <button onClick={() => this.getNowPlaying()}>
+                        Check Now Playing
+                    </button>
+                    <button onClick={() => this.getPlaylists()}>
+                        Retrieve playlists
+                    </button>
+                </div>
                 }
             </div>
 
         )
     }
     getNowPlaying(){
-        this.state.api.getMyCurrentPlaybackState()
+        this.state.api.getMyCurrentPlaybackState().then((response) => {
+            console.log(response);
+            this.setState({
+                nowPlaying: {
+                    name: response.item.name,
+                    albumArt: response.item.album.images[0].url
+                }
+            });
+        })
+    }
+    getPlaylists(){
+        this.state.api.getUserPlaylists()
             .then((response) => {
-                console.log(response);
+                let playlists = response.items.map((item) =>
+                    <li>{item.name}</li>
+                );
                 this.setState({
-                    nowPlaying: {
-                        name: response.item.name,
-                        albumArt: response.item.album.images[0].url
-                    }
+                    playlists: playlists
                 });
             })
     }
