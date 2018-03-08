@@ -1,5 +1,25 @@
 import React, { Component } from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom'
+import About from './About.jsx'
+export const BasicExample = () => (
+    <Router>
+        <div>
+            <ul>
+                <li><Link to="/">Welcome</Link></li>
+                <li><Link to="/about">About</Link></li>
+            </ul>
 
+            <hr/>
+
+            <Route exact path="/" component={Welcome}/>
+            <Route path="/about" component={About}/>
+        </div>
+    </Router>
+)
 class Welcome extends Component {
     constructor(props) {
         super(props);
@@ -12,9 +32,11 @@ class Welcome extends Component {
         };
     }
 
+
     render() {
         return (
             <div className="Welcome">
+                <div>{BasicExample}</div>
                 <p>Post your playlists and receive custom mixes</p>
                 <div>
                     Now Playing: { this.state.nowPlaying.name }
@@ -32,6 +54,7 @@ class Welcome extends Component {
                     Retrieve playlists
                 </button>
             </div>
+
         )
     }
     getNowPlaying(){

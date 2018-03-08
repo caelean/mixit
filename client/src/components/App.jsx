@@ -3,6 +3,12 @@ import '../App.css';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Login from './Login.jsx';
 import Welcome from './Welcome.jsx'
+import About from './About.jsx'
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom'
 
 class App extends Component {
     constructor(){
