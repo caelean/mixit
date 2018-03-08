@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 
 class Login extends Component {
 
@@ -7,9 +8,9 @@ class Login extends Component {
             <div className="Login">
                 <p>Post your playlists and receive custom mixes</p>
                 <a href='http://localhost:8484/login'>
-                    <button>
+                    <Button>
                         Login in with Spotify
-                    </button>
+                    </Button>
                 </a>
             </div>
         )

@@ -8,7 +8,6 @@ class App extends Component {
     constructor(){
         super();
         const params = this.getHashParams();
-        console.log(params);
         const spotifyApi = new SpotifyWebApi();
         const token = params.access_token;
         if (token) {
@@ -21,6 +20,7 @@ class App extends Component {
             playlists: ['user playlists'],
         };
     }
+
     render() {
         return (
             <div className='App'>
@@ -36,9 +36,10 @@ class App extends Component {
             </div>
         )
     }
+
     getHashParams() {
-        var hashParams = {};
-        var e, r = /([^&;=]+)=?([^&;]*)/g,
+        let hashParams = {};
+        let e, r = /([^&;=]+)=?([^&;]*)/g,
             q = window.location.hash.substring(1);
         e = r.exec(q);
         while (e) {

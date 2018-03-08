@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
+import Playlist from './Playlist.jsx'
+import { Button } from 'react-bootstrap';
+
 
 class Welcome extends Component {
     constructor(props) {
         super(props);
-        console.log(this);
         const spotifyApi = this.props.api;
         this.state = {
             nowPlaying: {name: 'Not Checked', albumArt: ''},
             api: spotifyApi,
-            playlists: ['user playlists'],
+            playlists: []
         };
+
+        spotifyApi.getUserPlaylists().then((response) => {
+
+            let playlists = response.items.map((item) =>
+                <Playlist playlist={item.id}
+                          api={this.state.api}
+                />
+            );
+            this.setState({
+                playlists: playlists
+            })
+        });
     }
 
     render() {
@@ -25,12 +39,9 @@ class Welcome extends Component {
                 <div>
                     Playlists: { this.state.playlists }
                 </div>
-                <button onClick={() => this.getNowPlaying()}>
+                <Button onClick={() => this.getNowPlaying()}>
                     Check Now Playing
-                </button>
-                <button onClick={() => this.getPlaylists()}>
-                    Retrieve playlists
-                </button>
+                </Button>
             </div>
         )
     }
@@ -44,17 +55,6 @@ class Welcome extends Component {
                 }
             });
         })
-    }
-    getPlaylists(){
-        this.state.api.getUserPlaylists()
-            .then((response) => {
-                let playlists = response.items.map((item) =>
-                    <li>{item.name}</li>
-                );
-                this.setState({
-                    playlists: playlists
-                });
-            })
     }
 }
 
