@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import '../App.css';
 import SpotifyWebApi from 'spotify-web-api-js';
-import Login from './Login.jsx';
-import Welcome from './Welcome.jsx'
+import Login from './Login'
+import Routes from "./Routes";
+import Navigation from "./Navigation"
+
 
 class App extends Component {
+
     constructor(){
         super();
         const params = this.getHashParams();
@@ -27,8 +30,10 @@ class App extends Component {
                 <h1>Mixit</h1>
                 {
                     this.state.loggedIn ? (
-                        <Welcome api={ this.state.api }
-                                 text="hello"/>
+                        <div>
+                            <Navigation/>
+                            <Routes api={this.state.api}/>
+                        </div>
                     ) : (
                         <Login/>
                     )
@@ -49,4 +54,5 @@ class App extends Component {
         return hashParams;
     }
 }
+
 export default App;
