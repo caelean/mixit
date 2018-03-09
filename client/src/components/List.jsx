@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+import Playlist from "./Playlist";
 
 
 class List extends Component {
@@ -8,13 +9,15 @@ class List extends Component {
         super(props);
         const spotifyApi = this.props.api;
         this.state = {
-            api: spotifyApi,
-            playlists: []
+            playlists: [],
+            id: '',
+            user: '',
+            showAll: true
         };
         spotifyApi.getUserPlaylists().then((response) => {
             console.log(response);
             let playlists = response.items.map((playlist) =>
-                <tr>
+                <tr onClick={() => this.openPlaylist(playlist.id, playlist.owner.id)}>
                     <td>{playlist.name}</td>
                     <td>{playlist.tracks.total}</td>
                 </tr>
@@ -25,20 +28,43 @@ class List extends Component {
         });
     }
 
+    openPlaylist(id, user) {
+        this.setState({
+            id: id,
+            user: user,
+            showAll: false
+        })
+    }
+
+    showList() {
+        this.setState({
+            showAll: true
+        })
+    }
+
     render() {
         return (
             <div className="List">
-                <Table>
-                    <thead>
-                    <tr>
-                        <th>Playlist Name</th>
-                        <th>Number of Songs</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.playlists}
-                    </tbody>
-                </Table>
+                {
+                    this.state.showAll ? (
+                        <Table>
+                            <thead>
+                            <tr>
+                                <th>Playlist Name</th>
+                                <th>Number of Songs</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {this.state.playlists}
+                            </tbody>
+                        </Table>
+                    ) : (
+                    <div>
+                        <Button onClick={() => this.showList()}>Return</Button>
+                        <Playlist api={this.props.api} id={this.state.id} user={this.state.user}/>
+                    </div>
+                    )
+                }
             </div>
         )
     }
