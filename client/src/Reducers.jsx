@@ -6,14 +6,13 @@ const initialState = {
 };
 
 function apiReducer(state = initialState.api, action) {
-  console.log(action);
   switch (action.type) {
       case 'SET API':
       return action.api;
     default:
-      return state;
+      return null;
   }
 }
 
-const rootReducer = combineReducers({apiReducer})
+const rootReducer = combineReducers({apiReducer});
 export default rootReducer;
