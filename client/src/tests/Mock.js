@@ -32,4 +32,12 @@ export default class SpotifyMock {
         });
     }
 
+    returnUser() {
+        return 'username';
+    }
+
+    returnId() {
+        return'123';
+    }
+
 }
