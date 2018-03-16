@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+import Playlist from "./Playlist";
+import { connect } from 'react-redux';
+import * as actions from '../Actions';
+import { bindActionCreators } from 'redux';
 
 
 class Postings extends Component {
@@ -8,39 +12,78 @@ class Postings extends Component {
         super(props);
         const spotifyApi = this.props.api;
         this.state = {
-            api: spotifyApi,
-            playlists: []
+            playlists: [],
+            showAll: true
         };
-        spotifyApi.getUserPlaylists().then((response) => {
-            let playlists = response.items.map((playlist) =>
-                <tr key={playlist.name}>
-                    <td>{playlist.name}</td>
-                    <td>{playlist.tracks.total}</td>
-                </tr>
-            );
-            this.setState({
-                playlists: playlists
-            })
+        if (spotifyApi) {
+            spotifyApi.getUserPlaylists().then((response) => {
+                let playlists = response.items.map((playlist) =>
+                    <tr key={playlist.name}
+                        onClick={() => this.openPlaylist(playlist.id, playlist.owner.id)}>
+                        <td>{playlist.name}</td>
+                        <td>{playlist.tracks.total}</td>
+                    </tr>
+                );
+                this.setState({
+                    playlists: playlists
+                })
+            });
+        }
+    }
+
+    openPlaylist(id, user) {
+        this.setState({
+            showAll: false
         });
+        this.props.actions.setID(id);
+        this.props.actions.setUser(user);
+
+    }
+
+    showList() {
+        this.setState({
+            showAll: true
+        })
     }
 
     render() {
         return (
             <div className="Postings">
-                <Table>
-                    <thead>
-                    <tr>
-                        <th>Playlist Name</th>
-                        <th>Number of Songs</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.playlists}
-                    </tbody>
-                </Table>
+                {
+                    this.state.showAll ? (
+                        <Table>
+                            <thead>
+                            <tr>
+                                <th>Playlist Name</th>
+                                <th>Number of Songs</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.playlists}
+                            </tbody>
+                        </Table>
+                    ) : (
+                    <div>
+                        <Playlist/>
+                        <Button onClick={() => this.showList()}>Return</Button>
+                    </div>
+                    )
+                }
             </div>
         )
     }
 }
 
-export default Postings;
+function mapStateToProps(state) {
+    return {
+        api: state.apiReducer
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Postings);

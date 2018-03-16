@@ -64,8 +64,8 @@ class List extends Component {
                         </Table>
                     ) : (
                     <div>
-                        <Button onClick={() => this.showList()}>Return</Button>
                         <Playlist/>
+                        <Button onClick={() => this.showList()}>Return</Button>
                     </div>
                     )
                 }
