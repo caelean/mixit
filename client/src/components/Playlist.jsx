@@ -11,17 +11,21 @@ class Playlist extends Component {
             api: spotifyApi,
             songs: [],
         };
-        spotifyApi.getPlaylistTracks(this.props.user,this.props.id).then((response) => {
-            let songs = response.items.map((song) =>
-                <tr>
-                    <td>{song.track.name}</td>
-                    <td>{song.track.artists.map((artist) => <span className="nobr">{artist.name}&nbsp;&nbsp;&nbsp;</span>)}</td>
-                </tr>
-            );
-            this.setState({
-                songs: songs
-            })
-        });
+        if(spotifyApi) {
+            spotifyApi.getPlaylistTracks(this.props.user, this.props.id).then((response) => {
+                let songs = response.items.map((song) =>
+                    <tr key={song.track.name}>
+                        <td>{song.track.name}</td>
+                        <td>{song.track.artists.map((artist) => <span
+                            key={artist.name}
+                            className="nobr">{artist.name}&nbsp;&nbsp;&nbsp;</span>)}</td>
+                    </tr>
+                );
+                this.setState({
+                    songs: songs
+                })
+            });
+        }
     }
 
     render() {

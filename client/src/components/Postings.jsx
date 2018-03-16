@@ -13,7 +13,7 @@ class Postings extends Component {
         };
         spotifyApi.getUserPlaylists().then((response) => {
             let playlists = response.items.map((playlist) =>
-                <tr>
+                <tr key={playlist.name}>
                     <td>{playlist.name}</td>
                     <td>{playlist.tracks.total}</td>
                 </tr>

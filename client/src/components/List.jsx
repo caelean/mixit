@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../Actions';
 import { bindActionCreators } from 'redux';
 
+
 class List extends Component {
 
     constructor(props) {
@@ -14,17 +15,20 @@ class List extends Component {
             playlists: [],
             showAll: true
         };
-        spotifyApi.getUserPlaylists().then((response) => {
-            let playlists = response.items.map((playlist) =>
-                <tr onClick={() => this.openPlaylist(playlist.id, playlist.owner.id)}>
-                    <td>{playlist.name}</td>
-                    <td>{playlist.tracks.total}</td>
-                </tr>
-            );
-            this.setState({
-                playlists: playlists
-            })
-        });
+        if (spotifyApi) {
+            spotifyApi.getUserPlaylists().then((response) => {
+                let playlists = response.items.map((playlist) =>
+                    <tr key={playlist.name}
+                        onClick={() => this.openPlaylist(playlist.id, playlist.owner.id)}>
+                        <td>{playlist.name}</td>
+                        <td>{playlist.tracks.total}</td>
+                    </tr>
+                );
+                this.setState({
+                    playlists: playlists
+                })
+            });
+        }
     }
 
     openPlaylist(id, user) {
@@ -69,11 +73,13 @@ class List extends Component {
         )
     }
 }
+
 function mapStateToProps(state) {
     return {
         api: state.apiReducer
     };
 }
+
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(actions, dispatch)
