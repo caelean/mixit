@@ -11,8 +11,8 @@ class Routes extends Component {
         return (
             <div className="Routes">
                 <Route path="/welcome" render={() => {return <Welcome/>}}/>
-                <Route path="/playlists" render={() => {return <List api={this.props.api}/>}}/>
-                <Route path="/postings" render={() => {return <Postings api={this.props.api}/>}}/>
+                <Route path="/playlists" render={() => {console.log('here'); return <List/>}}/>
+                <Route path="/postings" render={() => {return <Postings/>}}/>
             </div>
         )
     }

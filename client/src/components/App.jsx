@@ -4,12 +4,15 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import Login from './Login'
 import Routes from "./Routes";
 import Navigation from "./Navigation"
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../Actions';
+import { withRouter } from 'react-router';
 
 class App extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         const params = this.getHashParams();
         const spotifyApi = new SpotifyWebApi();
         const token = params.access_token;
@@ -18,10 +21,10 @@ class App extends Component {
         }
         this.state = {
             loggedIn: token ? true : false,
-            nowPlaying: { name: 'Not Checked', albumArt: '' },
             api: spotifyApi,
             playlists: ['user playlists'],
         };
+        this.props.actions.setAPI(spotifyApi);
     }
 
     render() {
@@ -32,7 +35,7 @@ class App extends Component {
                     this.state.loggedIn ? (
                         <div>
                             <Navigation/>
-                            <Routes api={this.state.api}/>
+                            <Routes/>
                         </div>
                     ) : (
                         <Login/>
@@ -54,5 +57,14 @@ class App extends Component {
         return hashParams;
     }
 }
+function mapStateToProps(state, ownProps) {
+    return {};
+}
 
-export default App;
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import Playlist from "./Playlist";
-
+import { connect } from 'react-redux';
+// import * as actions from '../Actions';
 
 class List extends Component {
 
@@ -15,7 +16,6 @@ class List extends Component {
             showAll: true
         };
         spotifyApi.getUserPlaylists().then((response) => {
-            console.log(response);
             let playlists = response.items.map((playlist) =>
                 <tr onClick={() => this.openPlaylist(playlist.id, playlist.owner.id)}>
                     <td>{playlist.name}</td>
@@ -55,7 +55,7 @@ class List extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.state.playlists}
+                                {this.state.playlists}
                             </tbody>
                         </Table>
                     ) : (
@@ -69,5 +69,17 @@ class List extends Component {
         )
     }
 }
+function mapStateToProps(state) {
+    console.log('here');
+    console.log(state);
+    return {
+        api: state.apiReducer
+    };
+}
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         actions: bindActionCreators(actions, dispatch)
+//     }
+// }
 
-export default List;
+export default connect(mapStateToProps)(List);
