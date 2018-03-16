@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import Playlist from "./Playlist";
 import { connect } from 'react-redux';
-// import * as actions from '../Actions';
+import * as actions from '../Actions';
+import { bindActionCreators } from 'redux';
 
 class List extends Component {
 
@@ -11,8 +12,6 @@ class List extends Component {
         const spotifyApi = this.props.api;
         this.state = {
             playlists: [],
-            id: '',
-            user: '',
             showAll: true
         };
         spotifyApi.getUserPlaylists().then((response) => {
@@ -30,10 +29,11 @@ class List extends Component {
 
     openPlaylist(id, user) {
         this.setState({
-            id: id,
-            user: user,
             showAll: false
-        })
+        });
+        this.props.actions.setID(id);
+        this.props.actions.setUser(user);
+
     }
 
     showList() {
@@ -61,7 +61,7 @@ class List extends Component {
                     ) : (
                     <div>
                         <Button onClick={() => this.showList()}>Return</Button>
-                        <Playlist api={this.props.api} id={this.state.id} user={this.state.user}/>
+                        <Playlist/>
                     </div>
                     )
                 }
@@ -70,16 +70,14 @@ class List extends Component {
     }
 }
 function mapStateToProps(state) {
-    console.log('here');
-    console.log(state);
     return {
         api: state.apiReducer
     };
 }
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         actions: bindActionCreators(actions, dispatch)
-//     }
-// }
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
 
-export default connect(mapStateToProps)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(List);

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
 
 class Playlist extends Component {
     constructor(props) {
@@ -41,4 +43,12 @@ class Playlist extends Component {
     }
 }
 
-export default Playlist;
+function mapStateToProps(state) {
+    return {
+        api: state.apiReducer,
+        id: state.idReducer,
+        user: state.userReducer
+    };
+}
+
+export default connect(mapStateToProps)(Playlist);

@@ -5,3 +5,17 @@ export function setAPI(api) {
     api
   };
 }
+
+export function setID(id) {
+  return {
+    type: 'SET ID',
+    id
+  };
+}
+
+export function setUser(user) {
+  return {
+    type: 'SET USER',
+    user
+  };
+}
