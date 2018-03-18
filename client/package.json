@@ -18,6 +18,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "css-loader": "^0.28.10",
     "redux-devtools": "^3.4.1"
   }
 }
